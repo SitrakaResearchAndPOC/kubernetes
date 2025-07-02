@@ -56,7 +56,7 @@ Un pod est l'unité de base déployable dans kubernetes. Il contient:
 Fichier de refenrences
 ```
 apiVersion: v1
-kind: pod
+kind: Pod
 metadata:
   name: myapp
   labels:
@@ -71,16 +71,61 @@ spec:
     ports:
       - containerPort <Port>    
 ```
-
+Génerer notre premier code décalartif
 ```
-apiVersion: 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: khgcode
+  labels:
+    name: khgcode
+spec:
+  containers:
+  - name: myapp
+    image: nginx:latest
+    ports:
+      - containerPort: 80   
 ```
- 
-  
+Tapez ctrl+x et yes pour confirmer
 ```
-
+kubectl apply -f 01-pod.yaml
 ```
-
+Verifier le pod (surtout running) : 
+```
+kubectl get pod
+```
+Décrire un pod par 
+```
+kubectl describe pod <nom_du_pod>
+```
+```
+kubectl describe pod khgcode
+```
+Induire une erreur puis refaire l'exercice </br>
+eg: image : nginxxxxxxx </br>
+Regarder status de </br>
+```
+kubectl get pod
+```
+Regarder l'erreur pour le debug
+```
+kubectl describe pod khgcode
+```
+Rechanger en veritable image de nginx
+```
+kubectl apply -f 01-pod.yaml
+```
+Etat running de : 
+```
+kubectl get pods
+```
+Voir l'etat de notre pod :
+```
+kubectl logs <nom_pod>
+```
+```
+kubectl logs khgcode
+```
 
 
 # Ressources
