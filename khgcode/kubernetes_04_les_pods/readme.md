@@ -263,6 +263,60 @@ kubectl describe pod multi-container-pod
 ```
 kubectl logs multi-container-pod  -c sidecar2 -f
 ```
+Sans spécification, il fa se connecter par le premier conteneur du pod (k8s va afficher tous les autres conteneurs du pod)
+```
+kubectl exec -it multi-container-pod  -- bash
+```
+```
+exit
+```
+```
+kubectl exec -it multi-container-pod  -c sidecar2 -- ls
+```
+```
+kubectl exec -it multi-container-pod  -c sidecar2 -- sh
+```
+```
+exit
+```
+Donc, commande 
+```
+kubectl exec -it <nom_pod>  -c <nom_conteneur_dans_pod> -- <cmd>
+```
+```
+kubectl get pod
+```
+# Supprimer ses pods
+* Suppressions via yaml (décalartif)
+```
+kubectl delete -f <fichier_pod.yaml>
+```
+Comme,
+```
+kubectl delete -f 01-pod.yaml
+```
+Plus de temps dans le démarrage et extinction de pod
+```
+kubectl delete -f 02-podMulti.yaml 
+```
+Sidecar : un conteneur qui vient se gréffer au coteneur principal
+Sidecar utilisé avec : logs ou agent (grafana, flanebit, vault pour les secrets)
+* Suppressions via commande (impératif)
+```
+kubectl get pod
+```
+```
+kubectl delete pod khgcode2
+```
+```
+kubectl get pod
+```
+Exercice : </br>
+créer un pod dont le nom est khg-code-student avec les spécifications suivantes </br>
+image: httpd:latest </br>
+exposer port: 8080
+Ajouter une commande qui affiche : "mon test sereveur appache"
+
 
 # Ressources
 The formation is will be at [kubernetes_04_les_pods](https://www.youtube.com/watch?v=QiuV-49frh8)
